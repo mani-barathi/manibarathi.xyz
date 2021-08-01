@@ -13,7 +13,7 @@ export default function Home({ blogPosts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="mx-auto p-4 w-full max-w-screen-md px-8">
+      <div className="mx-auto p-4 w-full max-w-screen-md px-8 pb-24">
         <div>
           <h1 className="font-bold text-gray-800 text-3xl md:text-5xl tracking-tight mb-4">
             Hi I'm Manibarathi
@@ -36,8 +36,8 @@ export default function Home({ blogPosts }) {
             My Blogs
           </h1>
           <p className="mt-2 mb-2 text-gray-600 ">
-            Recently I've started writing Blog, most of them are related to tech
-            and coding. You can also view my blogs in
+            Recently I've started writing Blogs, most of them are related to
+            tech and coding. You can also view my blogs in
             <a
               href="https://blog.manibarathi.xyz"
               target="_blank"
@@ -61,7 +61,7 @@ export async function getStaticProps() {
   const files = fs.readdirSync(blogPath);
 
   const blogPosts = files.map((filename) => {
-    const slug = filename.replace(".md", "");
+    const slug = filename.replace(".mdx", "");
     const markdownWithMeta = fs.readFileSync(
       path.join("data", "blogs", filename),
       "utf-8"
