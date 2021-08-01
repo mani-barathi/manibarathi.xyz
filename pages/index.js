@@ -1,58 +1,52 @@
-import Head from "next/head";
-import Link from "next/Link";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import BlogPost from "../components/BlogPost";
+import PageContainer from "../layout/PageContainer";
+import CustomLink from "../components/common/CustomLink";
 
 export default function Home({ blogPosts }) {
   return (
-    <div className="flex flex-col min-h-screen py-5">
-      <Head>
-        <title>Manibarathi's Personal Site</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <div className="mx-auto p-4 w-full max-w-screen-md px-8 pb-24">
-        <div>
-          <h1 className="font-bold text-gray-800 text-3xl md:text-5xl tracking-tight mb-4">
-            Hi I'm Manibarathi
-          </h1>
-          <h3 className="mt-4 mb-4 text-gray-600 font-medium">
-            I'm a student from Chennai. I enjoy coding and exploring new
-            technologies. Since you found me on internet, do check out my blogs
-            and send me a
-            <Link href="/message">
-              <a className="ml-1 text-blue-500 font-medium hover:text-blue-700">
-                message
-              </a>
-            </Link>
-            .
-          </h3>
-        </div>
-
-        <div className="mt-8">
-          <h1 className="text-gray-800 text-xl font-bold md:text-3xl">
-            My Blogs
-          </h1>
-          <p className="mt-2 mb-2 text-gray-600 ">
-            Recently I've started writing Blogs, most of them are related to
-            tech and coding. You can also view my blogs in
-            <a
-              href="https://blog.manibarathi.xyz"
-              target="_blank"
-              className="ml-1 text-blue-500 font-medium hover:text-blue-700"
-            >
-              hashnode
-            </a>
-            .
-          </p>
-          {blogPosts.map((blog) => (
-            <BlogPost key={blog.slug} blog={blog} />
-          ))}
-        </div>
+    <PageContainer>
+      <div>
+        <h1 className="font-bold text-gray-800 text-3xl md:text-5xl tracking-tight mb-4">
+          Hi I'm Manibarathi
+        </h1>
+        <h3 className="mt-4 mb-4 text-gray-600 font-medium">
+          I'm a student from Chennai. I enjoy coding and exploring new
+          technologies. Since you found me on internet, do check out my blogs
+          and send me a
+          <CustomLink
+            href="/message"
+            className="ml-1 text-blue-500 hover:underline hover:text-blue-600"
+          >
+            message
+          </CustomLink>
+          .
+        </h3>
       </div>
-    </div>
+
+      <div className="mt-8">
+        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">
+          My Blogs
+        </h1>
+        <p className="mt-2 mb-2 text-gray-600 ">
+          Recently I've started writing Blogs, most of them are related to tech
+          and coding. You can also view my blogs in
+          <CustomLink
+            href="https://blog.manibarathi.xyz"
+            isNoramlATag={true}
+            className="ml-1 font-medium text-blue-500 hover:underline hover:text-blue-600"
+          >
+            hashnode
+          </CustomLink>
+          .
+        </p>
+        {blogPosts.map((blog) => (
+          <BlogPost key={blog.slug} blog={blog} />
+        ))}
+      </div>
+    </PageContainer>
   );
 }
 
