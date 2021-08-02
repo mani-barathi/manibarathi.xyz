@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Octave",
+    "link": "https://octave-music.web.app",
+    "github": "https://github.com/mani-barathi/Octave",
+    "description": "A music streaming app web app developed with ReactJs and Firebase."
+  },
+  {
+    "name": "Sorting Visualizer",
+    "link": null,
+    "github": "https://github.com/mani-barathi/Sorting-Visualizer",
+    "description": "A visualization tool for Sorting Algorithms coded in Python."
+  }
+]

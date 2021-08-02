@@ -4,6 +4,8 @@ import path from "path";
 import BlogPost from "../components/BlogPost";
 import PageContainer from "../layout/PageContainer";
 import CustomLink from "../components/common/CustomLink";
+import projects from "../data/projects.json";
+import ProjectCard from "../components/ProjectCard";
 
 export default function Home({ blogPosts }) {
   return (
@@ -13,9 +15,9 @@ export default function Home({ blogPosts }) {
           Hi I'm Manibarathi
         </h1>
         <h3 className="mt-4 mb-4 text-gray-600 font-medium">
-          I'm a student from Chennai. I enjoy coding and exploring new
-          technologies. Since you found me on internet, do check out my blogs
-          and send me a
+          I'm a student and a coding enthusiast from Chennai, India. I enjoy
+          coding and exploring new technologies. Since you found me on internet,
+          do check out my blogs and send me a
           <CustomLink
             href="/message"
             className="ml-1 text-blue-500 hover:underline hover:text-blue-600"
@@ -27,9 +29,7 @@ export default function Home({ blogPosts }) {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">
-          My Blogs
-        </h1>
+        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">Blogs</h1>
         <p className="mt-2 mb-2 text-gray-600 ">
           Recently I've started writing Blogs, most of them are related to tech
           and coding. You can also view my blogs in
@@ -44,6 +44,27 @@ export default function Home({ blogPosts }) {
         </p>
         {blogPosts.map((blog) => (
           <BlogPost key={blog.slug} blog={blog} />
+        ))}
+      </div>
+
+      <div className="mt-8">
+        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">
+          Projects
+        </h1>
+        <p className="mt-2 mb-2 text-gray-600 ">
+          I mostly code in JavaScript and Python, focussing on Frontend and API
+          development. All my projects are open-sourced and available on
+          <CustomLink
+            href="https://github.com/mani-barathi"
+            isNoramlATag={true}
+            className="ml-1 font-medium text-blue-500 hover:underline hover:text-blue-600"
+          >
+            GitHub
+          </CustomLink>
+          .
+        </p>
+        {projects.map((p) => (
+          <ProjectCard key={p.name} project={p} />
         ))}
       </div>
     </PageContainer>
