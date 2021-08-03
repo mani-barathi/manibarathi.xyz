@@ -11,7 +11,7 @@ export default function Home({ blogPosts }) {
   return (
     <PageContainer>
       <div>
-        <h1 className="font-bold text-gray-800 text-3xl md:text-5xl tracking-tight mb-4">
+        <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Hi I'm Manibarathi
         </h1>
         <h3 className="mt-4 mb-4 text-gray-600 font-medium">
@@ -29,7 +29,7 @@ export default function Home({ blogPosts }) {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">Blogs</h1>
+        <h1 className="text-gray-800 text-xl font-bold sm:text-3xl">Blogs</h1>
         <p className="mt-2 mb-2 text-gray-600 ">
           Recently I've started writing Blogs, most of them are related to tech
           and coding. You can also view my blogs in
@@ -48,10 +48,10 @@ export default function Home({ blogPosts }) {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-gray-800 text-xl font-bold md:text-3xl">
+        <h1 className="text-gray-800 text-xl font-bold sm:text-3xl">
           Projects
         </h1>
-        <p className="mt-2 mb-2 text-gray-600 ">
+        <p className="mt-2 text-gray-600 ">
           I mostly code in JavaScript and Python, focussing on Frontend and API
           development. All my projects are open-sourced and available on
           <CustomLink
@@ -63,9 +63,11 @@ export default function Home({ blogPosts }) {
           </CustomLink>
           .
         </p>
-        {projects.map((p) => (
-          <ProjectCard key={p.name} project={p} />
-        ))}
+        {projects
+          .filter((p) => p.show)
+          .map((p) => (
+            <ProjectCard key={p.name} project={p} />
+          ))}
       </div>
     </PageContainer>
   );

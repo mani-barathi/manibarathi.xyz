@@ -3,12 +3,21 @@
     "name": "Octave",
     "link": "https://octave-music.web.app",
     "github": "https://github.com/mani-barathi/Octave",
-    "description": "A music streaming app web app developed with ReactJs and Firebase."
+    "description": "A music streaming web app developed with ReactJs and Firebase.",
+    "show": true
   },
   {
     "name": "Sorting Visualizer",
     "link": null,
     "github": "https://github.com/mani-barathi/Sorting-Visualizer",
-    "description": "A visualization tool for Sorting Algorithms coded in Python."
+    "description": "A visualization tool for Sorting Algorithms coded in Python.",
+    "show": true
+  },
+  {
+    "name": "JavaScript Mini Projects",
+    "link": "https://mani-barathi.github.io/Javascript_MiniProjects/",
+    "github": "https://github.com/mani-barathi/Javascript_MiniProjects",
+    "description": "A collection of 20+ beginner friendly JavaScript projects.",
+    "show": true
   }
 ]

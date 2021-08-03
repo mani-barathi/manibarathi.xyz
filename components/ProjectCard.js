@@ -3,15 +3,14 @@ import CustomLink from "./common/CustomLink";
 
 function ProjectCard({ project }) {
   return (
-    <li className="mt-2 mb-2">
-      <CustomLink
-        href={project.link || project.github}
-        isNoramlATag={true}
-        className="p-1 text-gray-600 font-medium hover:text-gray-700"
-      >
-        {project.name}
-      </CustomLink>
-    </li>
+    <CustomLink href={project.link || project.github} isNoramlATag={true}>
+      <div className="p-3 my-2 border rounded hover:shadow">
+        <h3 className="text-gray-700 font-medium text-lg sm:text-xl">
+          {project.name}
+        </h3>
+        <p className="text-gray-600">{project.description}</p>
+      </div>
+    </CustomLink>
   );
 }
 
