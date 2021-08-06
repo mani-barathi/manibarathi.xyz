@@ -1,7 +1,8 @@
 import React from "react";
 import Head from "next/head";
+import Navbar from "../components/Navbar";
 
-function PageContainer({ children }) {
+function PageContainer({ showNavbar, children }) {
   return (
     <div className="flex flex-col min-h-screen py-5">
       <Head>
@@ -10,6 +11,7 @@ function PageContainer({ children }) {
       </Head>
 
       <div className="flex-grow mx-auto w-full max-w-screen-md pt-4 px-8 pb-24">
+        {showNavbar && <Navbar />}
         {children}
       </div>
     </div>
