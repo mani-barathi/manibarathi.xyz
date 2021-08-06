@@ -1,0 +1,82 @@
+---
+title: "Beginner's guide to SQL Pagination"
+date: "5-08-2021"
+---
+
+Imagine building an API, which retrieves data from a SQL database and sends them to the client app. And let's say that database has millions of records. Retrieving millions of records in a single go is extremely slow and inefficient for the API and the database. Not only the backend but even the client-side app requires a lot of loading time and memory to handle the incoming data.
+
+So how to fix this?
+
+** The solution is to paginate through the data and take records in small chunks as needed. **
+
+Pagination is crucial for any application, and in this blog, we'll look at implementing pagination in a SQL database in two ways
+
+1. Offset pagination
+2. Cursor pagination
+
+Consider the below table as the structure of the table which we'll take as an example.
+
+| id  | product_name | created_at                 |
+| --- | ------------ | -------------------------- |
+| 1   | monitor      | 2021-05-26 23:31:23.833611 |
+| 2   | keyboard     | 2021-06-01 12:42:10.984141 |
+
+`created_at` is a timestamp at which the record got inserted into the table.
+
+## Offset Pagination
+
+Offset-based pagination involves two parameters an offset and a limit. **Offset** is a number that tells how many records to skip before selecting records and **limit** is a number that tells how many records to retrieve.
+
+- On fetching records for the first time(1st page) the offset is basically 0, as we want to retrieve records from the beginning. So it's not required to pass an offset.
+
+```SQL
+SELECT * FROM products ORDER BY created_at DESC OFFSET 0 LIMIT 10;
+(or)
+SELECT * FROM products ORDER BY created_at DESC LIMIT 10;
+```
+
+In this query, we are simply retrieving the first 10 records which are ordered by `created_at` in descending order.
+
+> Ordering records by an appropriate column is very important while paginating. It ensures the retrieved data is consistent. Here we are ordering by `created_at` timestamp.
+
+- While fetching records for the next page, an offset is passed to tell how many records to skip before selecting.
+
+```SQL
+SELECT * FROM products ORDER BY created_at DESC OFFSET 10 LIMIT 10;
+```
+
+here we are skipping the first 10 records and then fetching the next 10 records.
+
+This type of pagination doesn't perform well if the number of records in the table increases over time. For example, let's assume the table has 5 million records and our query is trying to skip (offset) the first 4 million records and then fetch the next 10 records. Even though the query is fetching only 10 records it still has to go through the 4 million records which are in the front of it to know where it should start selecting data, thus making the query slow.
+
+Offset-based pagination is often used where the number of records is fixed and doesn't change that often. It is not ideal if there is a frequent insertion, deletion of records.
+
+## Cursor pagination
+
+Cursor-based pagination involves two parameters a cursor and a limit. **Cursor** is an identifier (pointer) to a record in the table, in simple words cursor is a value of a column in a row, which can be used to identify the row in the table. The idea is to retrieve the records which are available after the one pointed by the cursor. In this example, I'm taking the **created_at** column as the cursor.
+
+- On fetching records for the first time(1st page) the cursor is not required.
+
+```SQL
+SELECT * FROM products ORDER BY created_at DESC LIMIT 10;
+```
+
+In the above query, we are simply retrieving the first 10 products which are ordered by `created_at` in descending order.
+
+- While fetching records for the subsequent times, a cursor is passed to specify after which record the query should start selecting. In our example, the cursor will be the `created_at` column of the last record of the previous results. Let's say previously we fetched 10 records and now we want the next set of records, so the cursor will be the value of the `created_at` column of the 10th record from the previous result. (In our example the cursor will look something like this `2021-06-01 12:42:10.984141`)
+
+```SQL
+SELECT * FROM products WHERE created_at < '2021-06-01 12:42:10.984141' ORDER BY created_at DESC LIMIT 10;
+```
+
+Here the query will select 10 records whose created_at value is smaller than `2021-06-01 12:42:10.984141`.
+
+Essentially we are remembering the `created_at` of the last record from the last page we've seen and continuing from that record, but it requires the results to be sorted by 'created_at`.
+
+> It's very important that the cursor column and the column with which the records are ordered are the same (In our example it is created_at), If not this type of pagination will not work properly.
+
+This also removes the need for the query to parse the records that it has already seen by using a `where` condition in the query, because of this cursor pagination performs better than offset pagination if the number of records in the table increases over time or if there is a frequent insertion and deletion of records.
+
+---
+
+There are different scenarios in which offset and cursor pagination outperforms each other. Choosing the type of pagination depends on where the paginated data is used and how often new records are inserted.
