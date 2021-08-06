@@ -1,7 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import BlogPost from "../components/BlogPost";
+import BlogLink from "../components/BlogLink";
 import PageContainer from "../layout/PageContainer";
 import CustomLink from "../components/common/CustomLink";
 import projects from "../data/projects.json";
@@ -10,17 +10,25 @@ import ProjectCard from "../components/ProjectCard";
 export default function Home({ blogPosts }) {
   return (
     <PageContainer>
-      <div>
+      {/* TODO: remove `mt-12` from the below div after creating a Navbar Component */}
+      <div className="mt-12">
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Hi I'm Manibarathi
         </h1>
-        <h3 className="mt-4 mb-4 text-gray-600 font-medium">
+        <h3 className="mt-4 mb-4 text-gray-600 sm:text-lg">
           I'm a student and a coding enthusiast from Chennai, India. I enjoy
           coding and exploring new technologies. Since you found me on internet,
-          do check out my blogs and send me a
+          do check out my
+          <CustomLink
+            href="/blog"
+            className="ml-1 text-blue-500 font-medium hover:underline hover:text-blue-600"
+          >
+            blog
+          </CustomLink>{" "}
+          and send me a
           <CustomLink
             href="/message"
-            className="ml-1 text-blue-500 hover:underline hover:text-blue-600"
+            className="ml-1 text-blue-500 font-medium hover:underline hover:text-blue-600"
           >
             message
           </CustomLink>
@@ -29,10 +37,10 @@ export default function Home({ blogPosts }) {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-gray-800 text-xl font-bold sm:text-3xl">Blogs</h1>
-        <p className="mt-2 mb-2 text-gray-600 ">
-          Recently I've started writing Blogs, most of them are related to tech
-          and coding. You can also view my blogs in
+        <h1 className="text-gray-800 text-2xl font-bold sm:text-3xl">Blog</h1>
+        <p className="mt-2 mb-2 text-gray-600 sm:text-lg">
+          Recently I've started writing online, mostly about tech and coding.
+          You can also view my blog in
           <CustomLink
             href="https://blog.manibarathi.xyz"
             isNoramlATag={true}
@@ -43,15 +51,15 @@ export default function Home({ blogPosts }) {
           .
         </p>
         {blogPosts.map((blog) => (
-          <BlogPost key={blog.slug} blog={blog} />
+          <BlogLink key={blog.slug} blog={blog} />
         ))}
       </div>
 
       <div className="mt-8">
-        <h1 className="text-gray-800 text-xl font-bold sm:text-3xl">
+        <h1 className="text-gray-800 text-2xl font-bold sm:text-3xl">
           Projects
         </h1>
-        <p className="mt-2 text-gray-600 ">
+        <p className="mt-2 text-gray-600 sm:text-lg">
           I mostly code in JavaScript and Python, focussing on Frontend and API
           development. All my projects are open-sourced and available on
           <CustomLink

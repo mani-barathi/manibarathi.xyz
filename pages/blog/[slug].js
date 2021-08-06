@@ -10,8 +10,17 @@ import CustomLink from "../../components/common/CustomLink";
 function BlogPage({ frontmatter, slug, mdxSource }) {
   return (
     <PageContainer>
+      <nav className="flex justify-end w-full p-4 pb-5">
+        <CustomLink
+          href="/"
+          className="font-medium text-gray-700 hover:text-gray-900"
+        >
+          Home
+        </CustomLink>
+      </nav>
+
       <div>
-        <h1 className="font-bold text-gray-800 text-3xl md:text-5xl tracking-tight mb-4">
+        <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           {frontmatter.title}
         </h1>
         <p className="text-gray-500">{frontmatter.date}</p>
