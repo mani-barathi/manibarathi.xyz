@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import Image from "next/image";
 import PageContainer from "../../layout/PageContainer";
 import CustomLink from "../../components/common/CustomLink";
 
@@ -17,14 +18,19 @@ function BlogPage({ frontmatter, slug, mdxSource }) {
         <p className="text-gray-500">{frontmatter.date}</p>
       </div>
 
-      <main className="prose w-full max-w-none">
-        <MDXRemote {...mdxSource} />
+      <main className="prose sm:text-lg w-full max-w-none">
+        <MDXRemote
+          {...mdxSource}
+          components={{
+            Image,
+          }}
+        />
       </main>
 
-      <hr className="mt-1 mb-3 border-b border-gray-300" />
+      <hr className="mt-2 mb-3 border-b border-gray-300" />
 
-      <p className="p-3 bg-blue-100 rounded">
-        You can also view this blog in
+      <p className="p-3 text-gray-700 sm:text-lg bg-blue-100 rounded">
+        You can also view this post in
         <CustomLink
           href={`https://blog.manibarathi.xyz/${slug}`}
           isNoramlATag={true}
