@@ -10,6 +10,12 @@ function Navbar() {
       >
         Home
       </CustomLink>
+      <CustomLink
+        href="/about"
+        className="ml-2 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
+      >
+        About
+      </CustomLink>
     </nav>
   );
 }

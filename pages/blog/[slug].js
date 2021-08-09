@@ -10,7 +10,7 @@ import CustomLink from "../../components/common/CustomLink";
 
 function BlogPage({ frontmatter, slug, mdxSource }) {
   return (
-    <PageContainer showNavbar>
+    <PageContainer>
       <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           {frontmatter.title}

@@ -10,8 +10,7 @@ import ProjectCard from "../components/ProjectCard";
 export default function Home({ blogPosts }) {
   return (
     <PageContainer>
-      {/* TODO: remove `mt-12` from the below div after creating a Navbar Component */}
-      <div className="mt-12">
+      <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Hi I'm Manibarathi
         </h1>
