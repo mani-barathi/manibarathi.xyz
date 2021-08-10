@@ -17,17 +17,17 @@ export default function Home({ blogPosts }) {
         <h3 className="mt-4 mb-4 text-gray-600 sm:text-lg">
           I'm a student and a coding enthusiast from Chennai, India. I enjoy
           coding and exploring new technologies. Since you found me on internet,
-          do check out my
+          do check out my{" "}
           <CustomLink
             href="/blog"
-            className="ml-1 text-blue-500 font-medium hover:underline hover:text-blue-600"
+            className="text-blue-500 font-medium hover:underline hover:text-blue-600"
           >
             blog
           </CustomLink>{" "}
-          and send me a
+          and send me a{" "}
           <CustomLink
             href="/message"
-            className="ml-1 text-blue-500 font-medium hover:underline hover:text-blue-600"
+            className="text-blue-500 font-medium hover:underline hover:text-blue-600"
           >
             message
           </CustomLink>
@@ -39,11 +39,11 @@ export default function Home({ blogPosts }) {
         <h1 className="text-gray-800 text-2xl font-bold sm:text-3xl">Blog</h1>
         <p className="mt-2 mb-2 text-gray-600 sm:text-lg">
           Recently I've started writing online, mostly about tech and coding.
-          You can also view my blog in
+          You can also view my blog in{" "}
           <CustomLink
             href="https://blog.manibarathi.xyz"
             isNoramlATag={true}
-            className="ml-1 font-medium text-blue-500 hover:underline hover:text-blue-600"
+            className="font-medium text-blue-500 hover:underline hover:text-blue-600"
           >
             hashnode
           </CustomLink>
@@ -60,11 +60,11 @@ export default function Home({ blogPosts }) {
         </h1>
         <p className="mt-2 text-gray-600 sm:text-lg">
           I mostly code in JavaScript and Python, focussing on Frontend and API
-          development. All my projects are open-sourced and available on
+          development. All my projects are open-sourced and available on{" "}
           <CustomLink
             href="https://github.com/mani-barathi"
             isNoramlATag={true}
-            className="ml-1 font-medium text-blue-500 hover:underline hover:text-blue-600"
+            className="font-medium text-blue-500 hover:underline hover:text-blue-600"
           >
             GitHub
           </CustomLink>
