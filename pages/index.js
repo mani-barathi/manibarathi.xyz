@@ -1,11 +1,9 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
 import BlogLink from "../components/BlogLink";
 import PageContainer from "../layout/PageContainer";
 import CustomLink from "../components/common/CustomLink";
 import projects from "../data/projects.json";
 import ProjectCard from "../components/ProjectCard";
+import { getAllBlogsFrontmatter } from "../utils/blog";
 
 export default function Home({ blogPosts }) {
   return (
@@ -81,22 +79,6 @@ export default function Home({ blogPosts }) {
 }
 
 export async function getStaticProps() {
-  const blogPath = path.join("data", "blogs");
-  const files = fs.readdirSync(blogPath);
-
-  const blogPosts = files.map((filename) => {
-    const slug = filename.replace(".mdx", "");
-    const markdownWithMeta = fs.readFileSync(
-      path.join("data", "blogs", filename),
-      "utf-8"
-    );
-    const { data: frontmatter } = matter(markdownWithMeta);
-
-    return {
-      slug,
-      frontmatter,
-    };
-  });
-
+  const blogPosts = await getAllBlogsFrontmatter();
   return { props: { blogPosts } };
 }
