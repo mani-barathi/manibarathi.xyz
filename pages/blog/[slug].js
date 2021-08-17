@@ -6,8 +6,12 @@ import CustomLink from "../../components/common/CustomLink";
 import { getAllBlogsPaths, getBlogContent } from "../../utils/blog";
 
 function BlogPage({ frontmatter, slug, mdxSource }) {
+  console.log(frontmatter);
   return (
-    <PageContainer>
+    <PageContainer
+      title={`${frontmatter.title} - Manibarathi`}
+      description={frontmatter.description}
+    >
       <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           {frontmatter.title}

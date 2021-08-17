@@ -10,7 +10,7 @@ function about() {
   ];
 
   return (
-    <PageContainer>
+    <PageContainer title="About - Manibarathi">
       <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
         About
       </h1>

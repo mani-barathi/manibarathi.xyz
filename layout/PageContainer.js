@@ -2,11 +2,28 @@ import React from "react";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
 
-function PageContainer({ noNavbar, children }) {
+function PageContainer({ noNavbar, children, ...metas }) {
+  const meta = {
+    title: "Manibarathi",
+    description: "A 20 year old coding enthusiast and MCA student",
+    ...metas,
+  };
+
   return (
     <div className="flex flex-col min-h-screen py-5">
       <Head>
-        <title>Manibarathi's Personal Site</title>
+        <title>{meta.title}</title>
+        <meta name="title" content={meta.title} />
+        <meta name="description" content={meta.description} />
+        <meta name="author" content="Manibarathi" />
+        <meta name="keywords" content="student,MCA,coding,blog" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
