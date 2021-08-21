@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 function PageContainer({ noNavbar, children, ...metas }) {
   const meta = {
     title: "Manibarathi",
-    description: "A 20 year old coding enthusiast and MCA student",
+    description: "I'm a 20 year old MCA student and a coding enthusiast.",
     ...metas,
   };
 
