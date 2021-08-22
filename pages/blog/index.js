@@ -11,8 +11,9 @@ function index({ blogPosts }) {
           Blog
         </h1>
         <p className="mt-4 mb-4 text-gray-600 sm:text-lg">
-          This is a space where I write about tech, coding and share my thoughts
-          and experiences. All the articles are listed in chronological order.
+          This is a space where I write about tech, coding, and much more
+          sharing my thoughts and experiences. All the articles are listed in
+          chronological order.
         </p>
       </div>
 
@@ -23,7 +24,9 @@ function index({ blogPosts }) {
               <h2 className="text-gray-700 font-medium text-lg sm:text-xl">
                 {blog.frontmatter.title}
               </h2>
-              <p className="text-gray-500">{blog.frontmatter.description}</p>
+              <p className="sm:text-lg text-gray-500">
+                {blog.frontmatter.description}
+              </p>
             </div>
           </CustomLink>
         ))}

@@ -37,14 +37,13 @@ export default function Home({ blogPosts }) {
         <h1 className="text-gray-800 text-2xl font-bold sm:text-3xl">Blog</h1>
         <p className="mt-2 mb-2 text-gray-600 sm:text-lg">
           Recently I've started writing online, mostly about tech and coding.
-          You can also view my blog in{" "}
+          The recent few articles are listed below, and the entire list is{" "}
           <CustomLink
-            href="https://blog.manibarathi.xyz"
-            isNoramlATag={true}
+            href="/blog"
             className="font-medium text-blue-500 hover:underline hover:text-blue-600"
           >
-            hashnode
-          </CustomLink>
+            here
+          </CustomLink>{" "}
           .
         </p>
         {blogPosts.map((blog) => (

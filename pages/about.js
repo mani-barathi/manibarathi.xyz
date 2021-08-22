@@ -6,7 +6,6 @@ function about() {
     "Learning NextJs and building this site",
     "Writing articles and documenting my experiences",
     "Practicing coding problems",
-    "Learning Data Structures and Algorithms",
   ];
 
   return (
@@ -15,14 +14,15 @@ function about() {
         About
       </h1>
       <p className="text-gray-600 sm:text-lg">
-        Hey, I'm Mani. I'm an MCA student at VIT, Vellore.
+        Hey, I'm Mani. I'm an MCA student at VIT, Vellore. Apart from college, I
+        spend my free time speedcubing and building personal projects. I also
+        teach coding and write articles.
       </p>
 
       <p className="mt-3 text-gray-600 sm:text-lg">
         I grew up in Chennai, spending my school days playing football and
         hanging out with friends. I also hold a bachelor's degree in computer
-        science. Apart from college, I spend my free time coding personal
-        projects, speedcubing and recently I've started writing articles.
+        science.
       </p>
 
       <div className="mt-3">
