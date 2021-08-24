@@ -5,6 +5,12 @@ import PageContainer from "../../layout/PageContainer";
 import CustomLink from "../../components/common/CustomLink";
 import { getAllBlogsPaths, getBlogContent } from "../../utils/blog";
 
+function formatDate(d) {
+  const dd = new Date(d);
+  const ds = dd.toDateString().split(" ");
+  return `${ds[1]} ${ds[2]}, ${ds[3]}`;
+}
+
 function BlogPage({ frontmatter, slug, mdxSource }) {
   return (
     <PageContainer
@@ -12,10 +18,12 @@ function BlogPage({ frontmatter, slug, mdxSource }) {
       description={frontmatter.description}
     >
       <div>
-        <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
+        <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-5">
           {frontmatter.title}
         </h1>
-        <p className="text-gray-500">{frontmatter.date}</p>
+        <p className="text-gray-500 text-base mb-2">
+          {"Manibarathi"} / {formatDate(frontmatter.date)}
+        </p>
       </div>
 
       <main className="prose sm:text-lg w-full max-w-none">
