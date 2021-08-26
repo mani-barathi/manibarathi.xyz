@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
 import PageContainer from "../../layout/PageContainer";
 import CustomLink from "../../components/common/CustomLink";
+import MDXComponents from "../../components/MDXComponents";
 import { getAllBlogsPaths, getBlogContent } from "../../utils/blog";
 
 function formatDate(d) {
@@ -31,6 +32,7 @@ function BlogPage({ frontmatter, slug, mdxSource }) {
           {...mdxSource}
           components={{
             Image,
+            ...MDXComponents,
           }}
         />
       </main>

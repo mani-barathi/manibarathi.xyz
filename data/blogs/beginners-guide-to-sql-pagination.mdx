@@ -31,7 +31,7 @@ Offset-based pagination involves two parameters an offset and a limit. **Offset*
 
 - On fetching records for the first time(1st page) the offset is basically 0, as we want to retrieve records from the beginning. So it's not required to pass an offset.
 
-```SQL
+```sql
 SELECT * FROM products ORDER BY created_at DESC OFFSET 0 LIMIT 10;
 (or)
 SELECT * FROM products ORDER BY created_at DESC LIMIT 10;
@@ -43,7 +43,7 @@ In this query, we are simply retrieving the first 10 records which are ordered b
 
 - While fetching records for the next page, an offset is passed to tell how many records to skip before selecting.
 
-```SQL
+```sql
 SELECT * FROM products ORDER BY created_at DESC OFFSET 10 LIMIT 10;
 ```
 
@@ -59,7 +59,7 @@ Cursor-based pagination involves two parameters a cursor and a limit. **Cursor**
 
 - On fetching records for the first time(1st page) the cursor is not required.
 
-```SQL
+```sql
 SELECT * FROM products ORDER BY created_at DESC LIMIT 10;
 ```
 
@@ -67,7 +67,7 @@ In the above query, we are simply retrieving the first 10 products which are ord
 
 - While fetching records for the subsequent times, a cursor is passed to specify after which record the query should start selecting. In our example, the cursor will be the `created_at` column of the last record of the previous results. Let's say previously we fetched 10 records and now we want the next set of records, so the cursor will be the value of the `created_at` column of the 10th record from the previous result. (In our example the cursor will look something like this `2021-06-01 12:42:10.984141`)
 
-```SQL
+```sql
 SELECT * FROM products WHERE created_at < '2021-06-01 12:42:10.984141' ORDER BY created_at DESC LIMIT 10;
 ```
 
