@@ -1,4 +1,5 @@
 import React from "react";
+// import Image from "next/image";
 import PageContainer from "../layout/PageContainer";
 
 function about() {
@@ -13,6 +14,14 @@ function about() {
       <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
         About
       </h1>
+      {/* <Image
+        src="https://avatars.githubusercontent.com/u/49336839?s=460&u=fbbc21b3ee2066b82cf7ddf1205524757ac5f3f4&v=4"
+        height="200"
+        width="200"
+        alt="image"
+        className="rounded-lg sm:mr-8"
+          /> */}
+
       <p className="text-gray-600 sm:text-lg">
         Hey, I'm Mani. I'm an MCA student at VIT, Vellore. Apart from college, I
         spend my free time speedcubing and building personal projects. I also

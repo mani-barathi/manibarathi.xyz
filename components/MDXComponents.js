@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
 
 function Pre(props) {
@@ -25,6 +26,22 @@ function Pre(props) {
   );
 }
 
+function MarkdownLink(props) {
+  const href = props.href;
+  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
+
+  if (isInternalLink) {
+    return (
+      <Link href={href}>
+        <a {...props}>{props.children}</a>
+      </Link>
+    );
+  }
+
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+}
+
 export default {
   pre: Pre,
+  a: MarkdownLink,
 };
