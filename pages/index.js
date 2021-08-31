@@ -79,5 +79,6 @@ export default function Home({ blogPosts }) {
 
 export async function getStaticProps() {
   const blogPosts = await getAllBlogsFrontmatter();
-  return { props: { blogPosts } };
+  const latestBlogPosts = blogPosts.slice(0, 3);
+  return { props: { blogPosts: latestBlogPosts } };
 }
