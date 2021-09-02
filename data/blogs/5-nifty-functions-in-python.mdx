@@ -1,0 +1,242 @@
+---
+title: "5 Nifty Functions in Python"
+date: "2021-09-02"
+postedOnHashNode: true
+description: "Python has a lot of built-in functions which reduces the complexity, keeps the code concise, and improves the readability of the code."
+---
+
+<Image src="/images/5-nifty-functions-in-python/cover.png" width={1400} height={750} alt="nifty functions in python" />
+
+Functions in programming are just reusable chunks of code, but a popular high-level language like Python can do more with it. Python also has a lot of built-in functions which can do a lot and reduce the complexity of the overall program. Python also supports [higher-order functions](https://www.geeksforgeeks.org/higher-order-functions-in-python/), meaning it treats functions as objects. In this article let's look at some useful built-in functions.
+
+## 1. Lambda functions
+Lambda is not a function itself, but it is used to create a function. Lambda functions, also known as anonymous functions are used to create single-line functions. It creates a function that may take 0 or more arguments and executes an expression. And the value from executing the expression is returned implicitly. These functions are defined with the keyword **lambda**.
+``` py
+# creating normal function
+def add2(x,y):
+     return x + y
+
+# creating lambda function
+# syntax -> function = lambda arguments: expression
+add = lambda x,y: x + y
+```
+In the above snippet, `lambda x,y: x + y` is a lambda function, where x and y are the arguments and `x + y` is the expression. The lambda keyword creates a function and returns the function object, which is assigned to the variable `add`.  
+
+The lambda function `add` is exactly the same as the normal function `add2`, except it is much more concise. Now it can be called as a normal function.
+```py
+print(add(2,3))   # 5
+```
+On calling the function `add` with 2 and 3 as arguments,  the expression `x + y` gets evaluated and the value is returned and printed.
+
+## 2. enumerate()
+enumerate() function takes an iterable(list, tuple, dictionary, etc..) and adds index(counter) to the elements of the iterable, and returns it. It can also take a number as an optional second argument, If passed the counting starts from that number, if omitted, counting starts from 0.
+
+``` py
+items = ['apples', 'oranges', 'watermelons']
+enumerate_items = enumerate(items)
+print(enumerate_items)
+
+# convert enumerate object to a list
+print(list(enumerate_items))
+
+# changing the default counter
+enumerate_items = enumerate(items,101)
+print(list(enumerate_items))
+```
+**Output**
+``` txt
+<enumerate object at 0x00000156792A3958>
+[(0, 'apples'), (1, 'oranges'), (2, 'watermelons')]
+[(101, 'apples'), (102, 'oranges'), (103, 'watermelons')]
+```
+
+Mostly enumerate() will be used with a loop to iterate over an iterable.
+``` py
+items = ['apples', 'oranges', 'watermelons']
+
+for item in enumerate(items):
+    print(item)
+
+print()
+
+for count,value in enumerate(items):
+    print(count,value)
+
+print()
+
+for count,value in enumerate(items,101):
+    print(count,value)
+
+```
+**Output**
+``` txt
+(0, 'apples')
+(1, 'oranges')
+(2, 'watermelons')
+
+0 apples
+1 oranges
+2 watermelons
+
+101 apples
+102 oranges
+103 watermelons
+```
+enumerate() when used with a for loop, each iteration is given an item, which is a tuple of length 2, where the first element is the count and the second element is the actual value. 
+
+Since we know that there are gonna be exactly two elements in the tuple, it can be destructured into two variables count and value. (see the second for loop)
+
+## 3. all() 
+all() function takes an iterable(list, tuple, dictionary, etc..) and returns true if all the elements in the iterable evaluates to True. Even if one element evaluates to false it returns false.
+``` py
+items_1 = [True, True, True]
+items_2 = [True, False, True]
+
+print(all(items_1))      # True
+print(all(items_1))      # False
+```
+Elements in the list need not be a boolean type, it can be numbers, strings, or any other objects as well. In Python, individual values can evaluate to True or False. To know what kind of values evaluates to true and whatnot, read this [article](https://www.pythontutorial.net/python-basics/python-boolean/).
+```py
+# all values are true
+l = [1, "hello", True, 5]
+print(all(l))      # True
+
+# all values are false
+l = [0, False, ""]
+print(all(l))      # false
+
+# one value is false
+l = ["hello" 3, 4, 0]
+print(all(l))      # false
+
+# one value is true
+l = [0, False, 5]
+print(all(l))      # false
+```
+
+## 4. any()
+any() function takes an iterable(list, tuple, dictionary, etc..) and returns true if atleast one the element in the iterable evaluates to True. If all the elements evaluates to false it returns false.
+``` py
+items_1 = [True, True, True]
+items_2 = [True, False, True]
+items_3 = [False, False, False]
+
+print(all(items_1))      # True
+print(all(items_1))      # True
+print(all(items_1))      # False
+```
+similar to `all()`, elements in the list need not be a boolean type , it can be numbers, strings, etc.
+```py
+# all values are true
+l = [1, "hello", True, 5]
+print(all(l))      # True
+
+# all values are false
+l = [0, False, ""]
+print(all(l))      # false
+
+# one value is false
+l = ["hello" 3, 4, 0]
+print(all(l))      # True
+
+# one value is true
+l = [0, False, 5]
+print(all(l))      # True
+```
+
+## 5. map()
+map() function takes a function and an iterable (list, tuple, etc..) as arguments. It applies the given function to each item in the iterable. map returns an [iterator](https://www.geeksforgeeks.org/python-difference-iterable-iterator/), which contains the result of running each item in the list through the function that is provided in the argument.
+```py
+def thrice(x):
+    return x * 3
+
+numbers = [1, 2, 3, 4]
+result = map(thrice, numbers)
+
+print(result)
+# converting map object to a list
+print(list(result))
+```
+**output**
+```txt
+<map object at 0x000001E9D301F388>
+[3, 6, 9, 12]
+```
+here each item from the numbers list will be passed into the thrice function one at a time. And the returned value will be kept track in the object returned by the map object which is saved in the result variable. To get the returned values from each function call the map object(result) can be converted into a list.
+
+Instead of converting the map object into a list, it can be used with a for loop as it is an iterator. The below example shows how to use it with a for loop.
+```py
+def thrice(x):
+    return x * 3
+
+numbers = [1, 2, 3, 4]
+result = map(thrice, numbers)
+
+for num in result:
+    print(num)
+```
+** output**
+```txt
+3
+6
+9
+12
+```
+**lambda functions** can be used in place of normal function. below example shows how that's done.
+```py
+numbers = [1, 2, 3, 4]
+result = map(lambda x : x * 3, numbers)
+
+print(list(result))     # [3, 6, 9, 12]
+```
+
+## 6. filter()
+filter() takes a function and an iterable(list, tuple, etc...) as arguments and runs the function with each of the items in the iterable and filter's out(removes) the items for which the function returns false. filter() returns a filter object, which is an iterator.
+ ``` py
+def check_positive(num):
+    return num > 0
+
+numbers = [-4, -2, -1, 3, 4]
+result = filter(check_positive,numbers)
+
+print(result)   
+# converting a filter object into a list
+print(list(result))  
+```
+**output**
+```txt
+<filter object at 0x000001E47ADAF8C8>
+[3, 4]
+```
+In the above code snippet of code, filter() executes check_positive() by passing each of the numbers from the list as an argument, and if the returned value from check_positive is true, then that item is kept in the resultant list, if not it is removed from the resultant list. 
+
+filter() doesn't return the resultant list directly instead, it returns an iterator for the resultant list. And that iterator can be converted to a list.
+
+When using the resultant filter object with a for loop, it need not be converted into a list. The below example shows how to use it with a for loop.
+```py
+def check_positive(num):
+    return num > 0
+
+numbers = [-4, -2, -1, 3, 4]
+result = filter(check_positive,numbers)
+
+for num in result:
+    print(num)
+```
+** output**
+```txt
+3
+4
+```
+using **lambda functions** with filter.
+```py
+numbers = [-4, -2, -1, 3, 4]
+result = filter(lambda x: x > 0,numbers)
+
+print(list(result))    # [3, 4]
+```
+---
+
+These kinds of functions keep the code concise and improve the readability of the code. Also, this style of coding is preferred as functional programming is getting more popular.
+<br/>
+Happy Coding!
