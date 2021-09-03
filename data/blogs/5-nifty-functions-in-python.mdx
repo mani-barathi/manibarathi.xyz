@@ -121,27 +121,27 @@ items_1 = [True, True, True]
 items_2 = [True, False, True]
 items_3 = [False, False, False]
 
-print(all(items_1))      # True
-print(all(items_1))      # True
-print(all(items_1))      # False
+print(any(items_1))      # True
+print(any(items_1))      # True
+print(any(items_1))      # False
 ```
 similar to `all()`, elements in the list need not be a boolean type , it can be numbers, strings, etc.
 ```py
 # all values are true
 l = [1, "hello", True, 5]
-print(all(l))      # True
+print(any(l))      # True
 
 # all values are false
 l = [0, False, ""]
-print(all(l))      # false
+print(any(l))      # false
 
 # one value is false
 l = ["hello" 3, 4, 0]
-print(all(l))      # True
+print(any(l))      # True
 
 # one value is true
 l = [0, False, 5]
-print(all(l))      # True
+print(any(l))      # True
 ```
 
 ## 5. map()
