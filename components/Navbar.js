@@ -11,6 +11,12 @@ function Navbar() {
         Home
       </CustomLink>
       <CustomLink
+        href="/blog"
+        className="ml-3 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
+      >
+        Blog
+      </CustomLink>
+      <CustomLink
         href="/about"
         className="ml-3 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
       >
