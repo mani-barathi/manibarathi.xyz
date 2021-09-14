@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/okaidia";
 
 function Pre(props) {
   const className = props.children.props.className || "";
@@ -8,6 +9,7 @@ function Pre(props) {
   return (
     <Highlight
       {...defaultProps}
+      theme={theme}
       code={props.children.props.children.trim()}
       language={language}
     >
