@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function PageContainer({ noNavbar, children, ...metas }) {
   const meta = {
@@ -27,9 +28,10 @@ function PageContainer({ noNavbar, children, ...metas }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex-grow mx-auto w-full max-w-screen-md pt-4 px-8 pb-24">
+      <div className="flex-grow mx-auto w-full max-w-screen-md pt-4 px-8 pb-10">
         {!noNavbar && <Navbar />}
         {children}
+        <Footer />
       </div>
     </div>
   );
