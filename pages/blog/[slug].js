@@ -37,10 +37,8 @@ function BlogPage({ frontmatter, slug, mdxSource }) {
         />
       </main>
 
-      <hr className="mt-2 mb-3 border-b border-gray-300" />
-
       {frontmatter.postedOnHashNode && (
-        <p className="p-3 text-gray-700 sm:text-lg bg-blue-100 rounded">
+        <p className="p-3 mt-5 text-gray-700 sm:text-lg bg-blue-100 rounded">
           You can also view this post in
           <CustomLink
             href={`https://blog.manibarathi.xyz/${slug}`}

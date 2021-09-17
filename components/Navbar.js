@@ -6,19 +6,19 @@ function Navbar() {
     <nav className="bg-white z-50 sticky top-0 flex justify-end w-full p-4">
       <CustomLink
         href="/"
-        className="ml-3 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
+        className="ml-3 sm:ml-5 font-normal text-gray-600 hover:text-gray-800 tracking-wide sm:text-lg"
       >
         Home
       </CustomLink>
       <CustomLink
         href="/blog"
-        className="ml-3 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
+        className="ml-3 sm:ml-5 font-normal text-gray-600 hover:text-gray-800 tracking-wide sm:text-lg"
       >
         Blog
       </CustomLink>
       <CustomLink
         href="/about"
-        className="ml-3 sm:ml-5 font-medium text-gray-700 hover:text-gray-900"
+        className="ml-3 sm:ml-5 font-normal text-gray-600 hover:text-gray-800 tracking-wide sm:text-lg"
       >
         About
       </CustomLink>
