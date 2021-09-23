@@ -5,15 +5,19 @@ import CustomLink from "../../components/common/CustomLink";
 
 function index({ blogPosts }) {
   return (
-    <PageContainer title="Blog - Manibarathi">
+    <PageContainer
+      title="Blog - Manibarathi"
+      description="This is a space where I write about tech, coding, and much more
+          sharing my thoughts and experiences."
+    >
       <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Blog
         </h1>
         <p className="mt-4 mb-4 text-gray-600 sm:text-lg">
           This is a space where I write about tech, coding, and much more
-          sharing my thoughts and experiences. All the articles are listed in
-          chronological order.
+          sharing my thoughts and experiences. There are {blogPosts.length}{" "}
+          articles here and all of them are listed in chronological order.
         </p>
       </div>
 
