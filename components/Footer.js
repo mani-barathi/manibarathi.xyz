@@ -20,7 +20,7 @@ function Footer() {
       </CustomLink>
 
       <CustomLink
-        href="https:/blog.manibarathi.xyz"
+        href="https://blog.manibarathi.xyz"
         className="ml-3 text-gray-700 hover:text-gray-800 tracking-wide sm:text-lg"
         isNoramlATag={true}
       >
