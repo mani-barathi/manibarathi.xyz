@@ -28,10 +28,14 @@ function PageContainer({ noNavbar, children, ...metas }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex-grow mx-auto w-full max-w-screen-md pt-4 px-8 pb-10">
+      <div className="flex-grow flex flex-col mx-auto w-full max-w-screen-md">
         {!noNavbar && <Navbar />}
-        {children}
-        <Footer />
+        <div className="flex-grow flex flex-col pt-4 px-8 pb-10">
+          {children}
+        </div>
+        <div className="px-8">
+          <Footer />
+        </div>
       </div>
     </div>
   );
