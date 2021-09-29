@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PageContainer from "../layout/PageContainer";
 import { auth, provider } from "../utils/firebase";
-import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { signOut, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 
 function message() {
   const [user, setUser] = useState(null);
@@ -9,7 +9,6 @@ function message() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         const loggedUser = {
           uid: user.uid,
@@ -18,6 +17,8 @@ function message() {
           email: user.email,
         };
         setUser(loggedUser);
+      } else {
+        setUser(null);
       }
       setIsLoading(false);
     });
@@ -27,6 +28,8 @@ function message() {
   const login = () => {
     signInWithPopup(auth, provider).catch(console.log);
   };
+
+  const logout = () => signOut(auth);
 
   return (
     <PageContainer title="Message - Manibarathi">
@@ -75,7 +78,10 @@ function message() {
               </button>
               <p className="mt-2 text-sm text-gray-500">
                 If you wish to logout click{" "}
-                <button className="text-blue-500 underline hover:text-blue-600">
+                <button
+                  className="text-blue-500 underline hover:text-blue-600"
+                  onClick={logout}
+                >
                   here
                 </button>
               </p>
