@@ -1,11 +1,5 @@
-import { initializeApp, getApps } from "firebase/app";
-
-console.log(process.env.NEXT_PUBLIC_APIKEY);
-console.log(process.env.NEXT_PUBLIC_AUTHDOMAIN);
-console.log(process.env.NEXT_PUBLIC_PROJECTID);
-console.log(process.env.NEXT_PUBLIC_STORAGEBUCKET);
-console.log(process.env.NEXT_PUBLIC_MESSAGINGSENDERID);
-console.log(process.env.NEXT_PUBLIC_APPID);
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_APIKEY,
@@ -16,6 +10,6 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APPID,
 };
 
-export const app = initializeApp(firebaseConfig);
-console.log(app);
-console.log(getApps());
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();

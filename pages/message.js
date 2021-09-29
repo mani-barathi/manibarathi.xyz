@@ -1,8 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageContainer from "../layout/PageContainer";
+import { auth, provider } from "../utils/firebase";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 
 function message() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        const loggedUser = {
+          uid: user.uid,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          email: user.email,
+        };
+        setUser(loggedUser);
+      }
+      setIsLoading(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  const login = () => {
+    signInWithPopup(auth, provider).catch(console.log);
+  };
 
   return (
     <PageContainer title="Message - Manibarathi">
@@ -29,7 +53,8 @@ function message() {
             </p>
             <button
               className="mt-3 py-1 px-5 font-medium text-white bg-blue-500 transition rounded transform active:translate-y-0.5 hover:bg-blue-600"
-              onClick={() => setUser("mani")}
+              onClick={login}
+              disabled={isLoading}
             >
               Login
             </button>
