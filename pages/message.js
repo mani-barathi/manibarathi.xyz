@@ -55,10 +55,16 @@ function message() {
               send a message.
             </p>
             <button
-              className="mt-3 py-1 px-5 font-medium text-white bg-blue-500 transition rounded transform active:translate-y-0.5 hover:bg-blue-600"
+              className="mt-3 py-1 px-5 flex items-center font-medium text-white bg-blue-500 transition rounded transform active:translate-y-0.5 hover:bg-blue-600"
               onClick={login}
               disabled={isLoading}
             >
+              {isLoading && (
+                <div
+                  style={{ borderTopColor: "#BDC3C7" }}
+                  className="mr-3 w-4 h-4 border-2 border-white border-solid rounded-full animate-spin"
+                ></div>
+              )}
               Login
             </button>
           </div>
