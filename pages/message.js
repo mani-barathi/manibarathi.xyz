@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PageContainer from "../layout/PageContainer";
-import { auth, provider } from "../utils/firebase";
+import { auth, provider, db } from "../utils/firebase";
 import { signOut, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { addDoc, serverTimestamp, collection } from "firebase/firestore/lite";
 
 function message() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const inputRef = useRef();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -30,6 +32,28 @@ function message() {
   };
 
   const logout = () => signOut(auth);
+
+  const sendMessage = async () => {
+    const text = inputRef.current.value;
+    if (!text) return;
+
+    const message = {
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      timestamp: serverTimestamp(),
+      text,
+    };
+
+    try {
+      await addDoc(collection(db, "messages"), message);
+      alert("Thanks for your message I will get back to you!");
+      inputRef.current.value = "";
+    } catch (e) {
+      console.log(e);
+      alert("Unable to send message.. try again after some time!");
+    }
+  };
 
   return (
     <PageContainer title="Message - Manibarathi">
@@ -74,15 +98,19 @@ function message() {
               className="px-2 py-1 outline-none border border-blue-200 focus:border-blue-300 rounded w-full"
               type="text"
               placeholder="Type a message"
+              ref={inputRef}
             />
-            <div className="flex justify-between items-end">
+            <div className="sm:flex sm:flex-row sm:justify-between sm:items-center">
               <button
                 type="submit"
                 className="mt-2 py-1 px-5 font-medium text-white bg-blue-500 transition rounded transform active:translate-y-0.5 hover:bg-blue-600"
+                onClick={sendMessage}
               >
                 Send
               </button>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-gray-500 text-right">
+                You are logged in as {user.displayName}
+                <br />
                 If you wish to logout click{" "}
                 <button
                   className="text-blue-500 underline hover:text-blue-600"
