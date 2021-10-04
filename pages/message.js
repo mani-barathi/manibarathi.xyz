@@ -56,7 +56,10 @@ function message() {
   };
 
   return (
-    <PageContainer title="Message - Manibarathi">
+    <PageContainer
+      title="Message - Manibarathi"
+      description="Whether it's feedback or a question or a suggestion, do send me a message."
+    >
       <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Leave a message
