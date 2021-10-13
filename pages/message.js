@@ -7,6 +7,7 @@ import { addDoc, serverTimestamp, collection } from "firebase/firestore/lite";
 function message() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitStatus, setSubmitStatus] = useState(null);
   const inputRef = useRef();
 
   useEffect(() => {
@@ -47,11 +48,18 @@ function message() {
 
     try {
       await addDoc(collection(db, "messages"), message);
-      alert("Thanks for your message I will get back to you!");
+      setSubmitStatus({
+        color: "green",
+        text: "Thanks for your message I will get back to you!",
+      });
+      setTimeout(() => setSubmitStatus(null), 3000);
       inputRef.current.value = "";
     } catch (e) {
       console.log(e);
-      alert("Unable to send message.. try again after some time!");
+      setSubmitStatus({
+        color: "red",
+        text: "Unable to send message.. try again after some time!",
+      });
     }
   };
 
@@ -69,6 +77,21 @@ function message() {
           want to say hello, feel free to leave a message and I'll get back to
           you as soon as I can.
         </p>
+
+        {submitStatus && (
+          <div
+            className={`flex justify-between my-1 p-2 text-white bg-${submitStatus.color}-400 rounded`}
+          >
+            <p>{submitStatus.text}</p>
+            <button
+              className="text-white"
+              onClick={() => setSubmitStatus(null)}
+            >
+              &#10005;
+            </button>
+          </div>
+        )}
+
         {!user ? (
           <div className="p-3 mt-3 text-gray-700 bg-blue-100 rounded-md border border-blue-200">
             <p className="sm:text-lg">
