@@ -49,7 +49,7 @@ function message() {
     try {
       await addDoc(collection(db, "messages"), message);
       setSubmitStatus({
-        color: "green",
+        status: true,
         text: "Thanks for your message I will get back to you!",
       });
       setTimeout(() => setSubmitStatus(null), 3000);
@@ -57,7 +57,7 @@ function message() {
     } catch (e) {
       console.log(e);
       setSubmitStatus({
-        color: "red",
+        status: false,
         text: "Unable to send message.. try again after some time!",
       });
     }
@@ -80,7 +80,9 @@ function message() {
 
         {submitStatus && (
           <div
-            className={`flex justify-between my-1 p-2 text-white bg-${submitStatus.color}-400 rounded`}
+            className={`flex justify-between my-1 p-2 text-white ${
+              submitStatus.status ? "bg-green-400" : "bg-red-400"
+            } rounded`}
           >
             <p>{submitStatus.text}</p>
             <button
