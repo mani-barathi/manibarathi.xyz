@@ -11,7 +11,7 @@ function PageContainer({ noNavbar, children, ...metas }) {
   };
 
   return (
-    <div className="flex flex-col min-h-screen py-5">
+    <div className="bg-gray-50 flex flex-col min-h-screen py-5">
       <Head>
         <title>{meta.title}</title>
         <meta name="title" content={meta.title} />

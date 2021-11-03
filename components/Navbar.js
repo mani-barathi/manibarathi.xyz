@@ -3,7 +3,7 @@ import CustomLink from "./common/CustomLink";
 
 function Navbar() {
   return (
-    <nav className="bg-white z-50 sticky top-0 flex justify-end w-full p-4">
+    <nav className="bg-gray-50 z-50 sticky top-0 flex justify-end w-full p-4">
       <CustomLink
         href="/"
         className="ml-3 sm:ml-5 font-normal text-gray-600 hover:text-gray-800 tracking-wide sm:text-lg"

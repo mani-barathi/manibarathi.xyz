@@ -5,7 +5,7 @@ function BlogPost({ blog }) {
   return (
     <li className="mt-2 mb-2">
       <Link href={`/blog/${blog.slug}`}>
-        <a className="p-1 text-gray-500 font-medium sm:text-lg hover:text-gray-700">
+        <a className="p-1 text-gray-600 font-medium sm:text-lg hover:text-gray-700">
           {blog.frontmatter.title}
         </a>
       </Link>
