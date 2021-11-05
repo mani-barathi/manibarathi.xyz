@@ -12,19 +12,22 @@ function formatDate(d) {
   return `${ds[1]} ${ds[2]}, ${ds[3]}`;
 }
 
-function BlogPage({ frontmatter, slug, mdxSource }) {
+function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
   return (
     <PageContainer
       title={`${frontmatter.title} - Manibarathi`}
       description={frontmatter.description}
     >
-      <div>
+      <div className="mb-5">
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-5">
           {frontmatter.title}
         </h1>
-        <p className="text-gray-500 text-base mb-2">
-          {"Manibarathi"} / {formatDate(frontmatter.date)}
-        </p>
+        <div className="text-gray-500 flex flex-col sm:flex-row sm:justify-between">
+          <p>
+            {"Manibarathi"} / {formatDate(frontmatter.date)}
+          </p>
+          <span>{readingTime.text} </span>
+        </div>
       </div>
 
       <main className="prose sm:text-lg w-full max-w-none">
@@ -59,8 +62,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { frontmatter, mdxSource } = await getBlogContent(params.slug);
-  return { props: { frontmatter, mdxSource, slug: params.slug } };
+  const { frontmatter, mdxSource, time } = await getBlogContent(params.slug);
+  return {
+    props: { frontmatter, mdxSource, slug: params.slug, readingTime: time },
+  };
 }
 
 export default BlogPage;
