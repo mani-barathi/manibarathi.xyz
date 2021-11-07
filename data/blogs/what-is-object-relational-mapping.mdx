@@ -1,0 +1,72 @@
+---
+title: "What is Object Relational Mapping?"
+date: "2021-11-07"
+postedOnHashNode: true
+description: "Object Relational Mapping is a technique that allows a program to interact with a database using Object Oriented concepts."
+---
+
+<Image src="/images/what-is-object-relational-mapping/cover.png" width={1400} height={750} alt="ORM(Object Relational Mapping)" />
+
+Object Relational Mapping is an approach to interact with a SQL database with the use of an object-oriented paradigm. Since most programming languages use object-oriented concepts, developers can make use of those concepts to ease the process of interacting with a database.  An object-relational mapper (ORM) is a library that will transfer the data stored in relational database tables into objects that are more commonly used in programs/apps.
+
+## Why should you use an ORM?
+ORM provides abstraction and allows developers to write code for their application, instead of writing SQL to perform CRUD operations.
+
+Without an ORM if you want to connect a program/App to a database, you would do that with the use of the particular database driver. So then, you can execute SQL queries from the program.
+
+```py
+conn = sqlite3.connect('database.db')
+query1 = "insert into posts(5, 'some text', 'jane')"
+conn.execute(query)
+
+query2 = "select * from posts where author='jane' "
+result = conn.execute(query2)
+```
+In the above snippet, the program is connected to an SQLite database and the connection object is stored in the variable `conn`. And, queries are executed using the connection object. This is how typically a program interacts with a database.
+
+When using an ORM, you need not write SQL queries, you can interact directly with classes and objects in the language you're using (I'm using python as the language and  [SQLAlchemy](https://www.sqlalchemy.org/) as the ORM library). To interact using objects, you would need to
+ define a class that will represent how the tables should look.
+
+```py
+class Post(Base):
+	__tablename__ = 'posts'
+	id = Column('id',Integer,primary_key=True)
+	caption = Column('password',Text,nullable=False)
+	author = Column('author',String(25),nullable=False)
+```
+Here we are creating a class that will represent a table in the database and the attributes in the class will represent the columns of the table. The ORM library will parse the class and will create the table and the columns with appropriate datatype and constraints. The class created is known as a Model or Schema.
+
+```py
+new_post = Post(id=5, caption='some text',author='jane')
+session.add(new_post)
+session.commit()
+```
+To insert a new record using an ORM we can simply create a Post object by passing the values for the attributes and then adding the newly created object to the session and committing it. The ORM library will interpret this and it will execute an insert query under the hood.
+
+Also for retrieving data from database, we can use the methods provided by the ORM.
+```py
+result = session.query(Post).filter(Post.author == 'jane')
+data = result.all()
+```
+Here, we are creating a query using the query() method for the Post model and also adding a filter to get the posts where the author is jane. ORM will execute a select query with appropriate where conditions behind the scenes to fetch the records.
+
+## Advantages of ORM
+- Developers don't have to write SQL.
+- Overcoming vendor specific SQL differences. ORM knows how to write vendor specific SQL so developers don't have to.
+- Development time gets reduced.
+- ORM makes the code easier to update, maintain, and reuse whenever required.
+
+## Disadvantages of ORM
+- Developers have to learn about the ORM library, which might take some time.
+- ORM can be slow.
+- ORM fails to compete against SQL queries for complex queries.
+
+## Popular ORMs
+Well, there is a lot of ORM libraries. Choosing an ORM depends on the language and framework which is being used. Some of the popular ORM are
+-  [Hibernate ](https://hibernate.org/orm/) for Java
+-  [SQLAlchemy](https://www.sqlalchemy.org/),  Django ORM  for Python
+-  [Sequelize](https://sequelize.org/master/) ,  [Typeorm ](https://typeorm.io/#/), [Prisma](https://www.prisma.io/) for NodeJs
+-  [Propel ](http://propelorm.org/) for PHP
+
+## Final thoughts
+I have been using ORM for my projects and I liked how much it simplified my work as I don't like writing SQL queries. This article just explains the idea of ORM, it's not a complete guide. So, I would highly recommend you to try doing a small project using an ORM to get a much better perspective.
