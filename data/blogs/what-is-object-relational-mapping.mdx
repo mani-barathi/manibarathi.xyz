@@ -31,7 +31,7 @@ When using an ORM, you need not write SQL queries, you can interact directly wit
 class Post(Base):
 	__tablename__ = 'posts'
 	id = Column('id',Integer,primary_key=True)
-	caption = Column('password',Text,nullable=False)
+	caption = Column('caption',Text,nullable=False)
 	author = Column('author',String(25),nullable=False)
 ```
 Here we are creating a class that will represent a table in the database and the attributes in the class will represent the columns of the table. The ORM library will parse the class and will create the table and the columns with appropriate datatype and constraints. The class created is known as a Model or Schema.
