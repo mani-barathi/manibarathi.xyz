@@ -1,6 +1,6 @@
 import BlogLink from "../components/BlogLink";
-import PageContainer from "../layout/PageContainer";
-import CustomLink from "../components/common/CustomLink";
+import PageContainer from "../components/PageContainer";
+import CustomLink from "../components/CustomLink";
 import projects from "../data/projects.json";
 import ProjectCard from "../components/ProjectCard";
 import { getAllBlogsFrontmatter } from "../utils/blog";

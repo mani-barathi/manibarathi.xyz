@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 function PageContainer({ noNavbar, children, ...metas }) {
   const meta = {
@@ -29,7 +29,7 @@ function PageContainer({ noNavbar, children, ...metas }) {
       </Head>
 
       <div className="flex-grow flex flex-col mx-auto w-full max-w-screen-md">
-        {!noNavbar && <Navbar />}
+        <Navbar />
         <div className="flex-grow flex flex-col pt-4 px-8 pb-10">
           {children}
         </div>

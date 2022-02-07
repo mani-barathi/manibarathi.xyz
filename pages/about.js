@@ -1,6 +1,5 @@
-import React from "react";
 // import Image from "next/image";
-import PageContainer from "../layout/PageContainer";
+import PageContainer from "../components/PageContainer";
 
 function about() {
   const whatAmIUpTo = [

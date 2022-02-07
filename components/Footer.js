@@ -1,4 +1,4 @@
-import CustomLink from "./common/CustomLink";
+import CustomLink from "./CustomLink";
 
 function Footer() {
   return (

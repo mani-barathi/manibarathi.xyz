@@ -1,8 +1,8 @@
 import React from "react";
 import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
-import PageContainer from "../../layout/PageContainer";
-import CustomLink from "../../components/common/CustomLink";
+import PageContainer from "../../components/PageContainer";
+import CustomLink from "../../components/CustomLink";
 import MDXComponents from "../../components/MDXComponents";
 import { getAllBlogsPaths, getBlogContent } from "../../utils/blog";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import PageContainer from "../layout/PageContainer";
+import PageContainer from "../components/PageContainer";
 import { auth, provider, db } from "../utils/firebase";
 import { signOut, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore/lite";

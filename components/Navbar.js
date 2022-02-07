@@ -1,5 +1,5 @@
 import React from "react";
-import CustomLink from "./common/CustomLink";
+import CustomLink from "./CustomLink";
 
 function Navbar() {
   return (

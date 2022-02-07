@@ -1,7 +1,6 @@
-import React from "react";
-import PageContainer from "../../layout/PageContainer";
+import PageContainer from "../../components/PageContainer";
+import CustomLink from "../../components/CustomLink";
 import { getAllBlogsFrontmatter } from "../../utils/blog";
-import CustomLink from "../../components/common/CustomLink";
 
 function index({ blogPosts }) {
   return (
