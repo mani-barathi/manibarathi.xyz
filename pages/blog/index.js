@@ -2,7 +2,7 @@ import PageContainer from "../../components/PageContainer";
 import CustomLink from "../../components/CustomLink";
 import { getAllBlogsFrontmatter } from "../../utils/blog";
 
-function index({ blogPosts }) {
+export default function Index({ blogPosts }) {
   return (
     <PageContainer
       title="Blog - Manibarathi"
@@ -16,7 +16,8 @@ function index({ blogPosts }) {
         <p className="mt-4 mb-4 text-gray-600 sm:text-lg">
           This is a space where I write about tech, coding, and much more
           sharing my thoughts and experiences. There are {blogPosts.length}{" "}
-          articles here and all of them are listed in chronological order.
+          articles here and all of them are listed in reverse chronological
+          order.
         </p>
       </div>
 
@@ -42,5 +43,3 @@ export async function getStaticProps() {
   const blogPosts = await getAllBlogsFrontmatter();
   return { props: { blogPosts } };
 }
-
-export default index;

@@ -4,7 +4,7 @@ import { auth, provider, db } from "../utils/firebase";
 import { signOut, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore/lite";
 
-function message() {
+export default function Message() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -154,5 +154,3 @@ function message() {
     </PageContainer>
   );
 }
-
-export default message;

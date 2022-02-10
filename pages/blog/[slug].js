@@ -17,6 +17,9 @@ function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
     <PageContainer
       title={`${frontmatter.title} - Manibarathi`}
       description={frontmatter.description}
+      image={
+        frontmatter.image ? `https://manibarathi.xyz${frontmatter.image}` : ""
+      }
     >
       <div className="mb-5">
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-5">

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import PageContainer from "../components/PageContainer";
 
-function about() {
+export default function About() {
   const whatAmIUpTo = [
     "Learning NextJs and building this site",
     "Writing articles and documenting my experiences",
@@ -18,9 +18,10 @@ function about() {
       <div className="flex flex-col-reverse sm:flex-row items-start">
         <div className="flex flex-col pr-8">
           <p className="text-gray-600 sm:text-lg max-w-xl">
-            Hey, I'm Mani. I'm an MCA student at VIT, Vellore. Apart from
-            college, I spend my free time speedcubing and building personal
-            projects. I also teach coding and write articles.
+            Hey, I'm Mani. I'm a Computer Science student at VIT, Vellore. I
+            like to create stuffs by coding. I spend my free time coding,
+            building personal projects and speedcubing. I also teach coding and
+            write articles.
           </p>
           <p className="mt-2 text-gray-600 sm:text-lg max-w-xl">
             I grew up in Chennai, spending my school days playing football and
@@ -51,5 +52,3 @@ function about() {
     </PageContainer>
   );
 }
-
-export default about;
