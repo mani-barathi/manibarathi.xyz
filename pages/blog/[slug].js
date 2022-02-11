@@ -18,7 +18,9 @@ function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
       title={`${frontmatter.title} - Manibarathi`}
       description={frontmatter.description}
       image={
-        frontmatter.image ? `https://manibarathi.xyz${frontmatter.image}` : ""
+        frontmatter.image
+          ? `https://manibarathi.xyz/images/${slug}/${frontmatter.image}`
+          : null
       }
     >
       <div className="mb-5">

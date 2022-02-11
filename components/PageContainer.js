@@ -7,6 +7,7 @@ function PageContainer({ noNavbar, children, ...metas }) {
   const meta = {
     title: "Manibarathi",
     description: "I'm a Computer Science Student and a coding enthusiast.",
+    image: null,
     ...metas,
   };
 

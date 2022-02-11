@@ -23,7 +23,7 @@ export default function Index({ blogPosts }) {
 
       <div className="mt-4">
         {blogPosts.map((blog) => (
-          <CustomLink href={`/blog/${blog.slug}`} key={blog.frontmatter.title}>
+          <CustomLink href={`/blog/${blog.slug}`} key={blog.slug}>
             <div className="mb-5">
               <h2 className="text-gray-700 font-medium text-lg sm:text-xl">
                 {blog.frontmatter.title}
