@@ -1,0 +1,277 @@
+---
+title: "Refactoring a React App to use Firebase v9"
+date: "2022-02-05"
+postedOnHashNode: true
+description: "The new firebase v9 uses a modular approach, such that your app imports only the services and functions it needs."
+image: "cover.png"
+---
+
+Firebase released its version 9 Web SDK around last year September. The new version implements a modular approach instead of the traditional dot-chained namespace approach. This is a major upgrade and it does require changes in the application code. This modular approach of the library allows tree shaking, such that your app imports only the services and functions it needs. Thus, reducing the build size a lot.
+
+I was having a react project where I was using firebase v8 to create a [Music streaming web app](https://github.com/mani-barathi/octave), kinda like Spotify or Youtube Music. And I did upgrade my project from firebase v8 to v9. So in this article, I’ve explained the upgrade process briefly.
+
+### Octave
+
+Octave is a project which I created last year, just to learn about React and Firebase (version 8). It’s a Music streaming app where users can login, listen to music, create their custom playlists, and so on. I did use Firebase authentication to login users, Firestore database to store data, and Cloud storage to store mp3 files and images. I was developing this project on and off. And after a period of 6 few months, I managed to add quite a few features like searching, media session controls, and song playlist. The web app is [hosted](https://octave-music.web.app/)  live and the code is available on [GitHub](https://github.com/mani-barathi/octave).
+
+### Structure of the App
+
+Since this is a midsize project I know that importing firebase functions directly inside components would make a mess. So, I kept all the code related to firebase under a specific directory called [api](https://github.com/mani-barathi/Octave/tree/master/src/api). Thus, I only have to refactor the files which are in api directory. The firebase app and service instances were initialized and exported from [src/firebase.js](https://github.com/mani-barathi/Octave/blob/master/src/firebase.js).
+
+If you want to refer to the project, the code before updating to version 9 is available in the [before-v9](https://github.com/mani-barathi/Octave/tree/before-v9) branch, and the code after updating to version 9 is available in the [master](https://github.com/mani-barathi/Octave) branch.
+
+### Installing firebase v9
+
+```bash
+npm i firebase@latest
+```
+
+After installing, we have to update the imports. Since I was using Firestore database, Cloud storage, authentication, I can’t update all the functions to use version 9 immediately. The updating process must be done in smaller steps, such that the app doesn’t break.
+
+Firebase provided a solution to this transition, by introducing a `compat` sub module with in firebase v9. `compat` is just the same as firebase v8, such that we keep using v8 code even after installing v9, basically allowing developers to upgrade without changing all the Firebase code at once. This can be done just by changing the import statements to use the `compat` version.
+
+```jsx
+// version 8
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
+
+// version 9 compat
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+```
+
+After changing to `compat` the app should work just fine, and we can start updating it.
+
+> Firebase mentioned that `compat` library is a temporary solution which can be used until your app is updated to v9 and `compat` will be removed in the next major release of firebase SDK.
+
+### Refactoring Authentication functions
+
+In version 8, all the authentication methods like **createUserWithEmailAndPassword**, **signInWithEmailAndPassword**, **onAuthStateChanged** are provided by the auth instance. So methods are called from auth object using the dot operator. The code would look something as shown below
+
+```jsx
+import "firebase/compat/auth";
+
+const auth = firebase.auth();
+
+export const signUp = (email, password) => {
+  return auth.createUserWithEmailAndPassword(email, password);
+};
+
+export const signIn = (email, password) => {
+  return auth.signInWithEmailAndPassword(email, password);
+};
+
+export const handleAuthStateChanged = (cb) => {
+  return auth.onAuthStateChanged(cb);
+};
+```
+
+In v9, all the authentication methods are exported from `firebase/auth`. We can import those functions into our app and start using them by simply calling them by passing the auth instance and the appropriate parameters.
+
+```jsx
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import "firebase/compat/auth";
+
+const auth = firebase.auth();
+
+export const signUp = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signIn = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+
+export const handleAuthStateChanged = (cb) => {
+  return onAuthStateChanged(auth, cb);
+};
+```
+
+After refactoring all the authentication code to use firebase v9, we can change the auth import from `firebase/compat/auth` to `firebase/auth`. And auth instance can be received by calling the `getAuth` function from `firebase/auth`.
+
+```jsx
+...
+import { getAuth } from "firebase/auth"
+...
+...
+export const auth = getAuth()
+```
+
+In my project, I kept all Authentication functions in [api/auth.js](https://github.com/mani-barathi/Octave/blob/master/src/api/auth.js) and then imported that into other components. Here is the code for [before](https://github.com/mani-barathi/Octave/blob/before-v9/src/api/auth.js) and [after](https://github.com/mani-barathi/Octave/blob/master/src/api/auth.js) version 9.
+
+### Refactoring Firestore functions
+
+**Adding a Document**
+
+To add a document in version 8, you would use the `db` instance and call the `collection` method to select the collection within which you are going to add a document. And then you chain the add method and pass in the object which needs to be added to the collection.
+Whereas in version 9 first, we have to import the functions `addDoc` , `collection`. we first call the `collection` function passing the `db` object and name of the collection that we are accessing. And then we call `addDoc` function and pass the collection object and the new object which we going to insert into the collection.
+
+```jsx
+// version 8 or version 9 compat
+export const createNewPlaylist = (name, uid) => {
+  return db.collection("playlists").add({
+    uid,
+    name,
+  });
+};
+
+// version 9
+import { collection, adddoc } from "firebase/firestore";
+
+export const createNewPlaylist = (name, uid) => {
+  return addDoc(collection(db, "playlists"), {
+    uid,
+    name,
+  });
+};
+```
+
+**Deleting a Document**
+
+In version 8 to delete a document, you would use the `db` instance and call the `collection` method to select the collection within which you are going to delete a document. And then you chain the `delete` method and pass in the document id which needs to be deleted from the collection.
+
+But, in version 9 first, we have to import the functions `addDoc` , `collection`. we first call the `collection` function passing the `db` object and name of the collection that we are accessing. And then we call `addDoc` function and pass the collection object and the new object which we going to insert into the collection.
+
+```jsx
+// version 8 or version 9 compat
+export const deletePlaylist = (playlistId) => {
+  return db.collection("playlists").doc(playlistId).delete();
+};
+
+// version 9
+import { deleteDoc, doc } from "firebase/firestore";
+
+export const deletePlaylist = (playlistId) => {
+  return deleteDoc(doc(db, "playlists", playlistId));
+};
+```
+
+**Retrieving a document**
+
+To retrieve a single document, in version 8 we would use the `collection` method to select the collection and then chain the `doc` method by passing the id and then chaining the `get` method.
+
+In version 9, To retrieve a single document we can use the `getDoc` function by passing the document reference to it. And, to create a document reference we use the `doc` function and pass the `db` instance, collection name, document id.
+
+```jsx
+// version 8 or version 9 copmat
+export const getPlaylist = (id) => {
+  return db.collection("playlists").doc(id).get();
+};
+
+// version 9
+import { doc, getDoc } from "firebase/firestore";
+
+export const getPlaylist = (id) => {
+  return getDoc(doc(db, "playlists", id));
+};
+```
+
+**Real Time listener**
+
+To set up a real-time listener, in version 8 you would chain the `onSnapshot` method to `collection` method, which can also include `where` and `orderBy` methods to filter and order data. We would also pass a callback function to `onSnapshot` , such that every time the data changes(that is, when a document is added, removed, or modified) in the Firestore database, the callback function is invoked while passing the changed documents as arguments.
+
+```jsx
+// version 8 or version 9 copmat
+export const getAllPlaylists = (uid, cb) => {
+  return db
+    .collection("playlists")
+    .where("uid", "==", uid)
+    .orderBy("createdAt", "desc")
+    .onSnapshot(cb);
+};
+```
+
+In version 9, we use the `query` function to create a query. we use the `collection` function to specify what collection we are trying to use. And additionally, we can also use the `where` method to specify any condition and `orderBy` function for sorting data. Finally, we pass the query object to the `onSnapshot` function along with the callback function, which gets called every time the query results change.
+
+```jsx
+// version 9
+export const getAllPlaylists = (uid, cb) => {
+  const q = query(
+    collection(db, "playlists"),
+    where("uid", "==", uid),
+    orderBy("createdAt", "desc")
+  );
+  return onSnapshot(q, cb);
+};
+```
+
+After refactoring all the firestore code to use firebase v9, we can remove the import `firebase/compat/firestore` . The `db` instance can be received by calling the `getFirestore` function from `firebase/firestore`.
+
+```jsx
+...
+import { getFirestore } from "firebase/firestore"
+...
+...
+export const db = getFirestore()
+```
+
+### Refactoring Cloud storage functions
+
+To upload or download the file, we need to first create a **reference**. A reference or ref is a pointer to a file in the cloud. By default the reference points to the root of the Cloud Storage bucket, but we change that by passing the location as an argument.
+
+In version 8, the reference is created by calling `ref` method from the storage object. To upload a file the `put` method is called from the reference object, where as to get the download url of a file the `getDownloadURL` method is called.
+
+```jsx
+// version 8 or version 9 compat
+export const uploadSong = (file) => {
+  const { name } = file;
+  return storage.ref(`songs/${name}`).put(file);
+};
+
+export const getSongURL = (fileName) => {
+  return storage.ref("songs", fileName).getDownloadURL();
+};
+```
+
+In version 9, a reference to a file can be created by calling the `ref` function by passing the storage instance as an argument. To upload a file we use the `uploadBytesResumable` function by passing the reference object and the file as arguments. And to get the download URL of a file, a file reference is created using the `ref` function, then that reference object is passed to the `getDownloadURL` function.
+
+```jsx
+// version 9
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+export const uploadSong = (file) => {
+  const { name } = file;
+  const storageRef = ref(storage, `songs/${name}`);
+  return uploadBytesResumable(storageRef, file);
+};
+
+export const getSongURL = (filename) => {
+  const fileRef = ref(storage, `songs/${filename}`);
+  return getDownloadURL(fileRef);
+};
+```
+
+After refactoring all the cloud storage code to use firebase v9, we can remove the import `firebase/compat/storage`. The `storage` instance can be received by calling the `getStorage` function from `firebase/firestore`.
+
+```jsx
+...
+import { getStorage } from "firebase/storage"
+...
+...
+export const storage = getStorage()
+```
+
+### Refactoring initialization code
+
+After updating all the service related code to version 9, finally we can update the firebase initialization code. Remove the firebase import from `firebase/compat/app` and import `initializeApp` from `firebase/app` , and call the function passing firebase config object as a argument.
+
+```jsx
+import { initializeApp } from "firebase/app"
+...
+const firebaseApp = initializeApp(firebaseConfig)
+...
+```
+
+---
+
+### Conclusion
+
+Firebase is one such technology that I enjoy using, and version 9 is definitely a game changer. I hope this article gave you a brief idea about firebase version 9 and how to start updating an app that uses the older version.
