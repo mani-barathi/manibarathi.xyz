@@ -10,7 +10,7 @@ export default function Home({ blogPosts }) {
     <PageContainer>
       <div>
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
-          Hi I'm Manibarathi
+          Hi I'm Mani bharathi
         </h1>
         <h3 className="mt-4 mb-4 text-gray-600 sm:text-lg">
           I'm a student and a coding enthusiast from Chennai, India. I enjoy

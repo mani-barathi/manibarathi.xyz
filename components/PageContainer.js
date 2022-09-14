@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 function PageContainer({ noNavbar, children, ...metas }) {
   const meta = {
-    title: "Manibarathi",
+    title: "Mani bharathi",
     description: "I'm a Computer Science Student and a coding enthusiast.",
     image: null,
     ...metas,

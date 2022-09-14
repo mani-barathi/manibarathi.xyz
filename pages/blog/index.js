@@ -5,7 +5,7 @@ import { getAllBlogsFrontmatter } from "../../utils/blog";
 export default function Index({ blogPosts }) {
   return (
     <PageContainer
-      title="Blog - Manibarathi"
+      title="Blog - Mani bharathi"
       description="This is a space where I write about tech, coding, and much more
           sharing my thoughts and experiences."
     >

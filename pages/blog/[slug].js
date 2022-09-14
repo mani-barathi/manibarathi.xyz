@@ -15,7 +15,7 @@ function formatDate(d) {
 function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
   return (
     <PageContainer
-      title={`${frontmatter.title} - Manibarathi`}
+      title={`${frontmatter.title} - Mani bharathi`}
       description={frontmatter.description}
       image={
         frontmatter.image
@@ -29,7 +29,7 @@ function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
         </h1>
         <div className="text-gray-500 flex flex-col sm:flex-row sm:justify-between">
           <p>
-            {"Manibarathi"} / {formatDate(frontmatter.date)}
+            {"Mani bharathi"} / {formatDate(frontmatter.date)}
           </p>
           <span>{readingTime.text} </span>
         </div>

@@ -65,7 +65,7 @@ export default function Message() {
 
   return (
     <PageContainer
-      title="Message - Manibarathi"
+      title="Message - Mani bharathi"
       description="Whether it's feedback or a question or a suggestion, do send me a message."
     >
       <div>

@@ -10,7 +10,7 @@ export default function About() {
   ];
 
   return (
-    <PageContainer title="About - Manibarathi">
+    <PageContainer title="About - Mani bharathi">
       <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
         About
       </h1>
