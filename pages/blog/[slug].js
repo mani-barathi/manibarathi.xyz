@@ -19,7 +19,7 @@ function BlogPage({ frontmatter, slug, mdxSource, readingTime }) {
       description={frontmatter.description}
       image={
         frontmatter.image
-          ? `https://manibarathi.xyz/images/${slug}/${frontmatter.image}`
+          ? `https://manibarathi.vercel.app/images/${slug}/${frontmatter.image}`
           : null
       }
     >

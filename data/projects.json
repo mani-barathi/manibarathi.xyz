@@ -14,6 +14,13 @@
     "show": true
   },
   {
+    "name": "Typechat",
+    "link": null,
+    "github": "https://github.com/mani-barathi/typechat",
+    "description": "A chat app built with React, Express, and Socket.io.",
+    "show": true
+  },
+  {
     "name": "JavaScript Mini Projects",
     "link": "https://mani-barathi.github.io/Javascript_MiniProjects/",
     "github": "https://github.com/mani-barathi/Javascript_MiniProjects",

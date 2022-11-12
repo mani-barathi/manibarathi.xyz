@@ -56,8 +56,8 @@ export default function Home({ blogPosts }) {
           Projects
         </h1>
         <p className="mt-2 text-gray-600 sm:text-lg">
-          I mostly code in JavaScript and Python, focussing on Frontend and API
-          development. All my projects are open-sourced and available on{" "}
+          I mostly code in JavaScript and Python, focussing on full stack
+          development. All my projects are available on{" "}
           <CustomLink
             href="https://github.com/mani-barathi"
             isNoramlATag={true}
