@@ -12,7 +12,7 @@ function PageContainer({ noNavbar, children, ...metas }) {
   };
 
   return (
-    <div className="bg-gray-50 flex flex-col min-h-screen py-5">
+    <div className="bg-gray-50 flex flex-col min-h-screen">
       <Head>
         <title>{meta.title}</title>
         <meta name="title" content={meta.title} />
@@ -33,8 +33,8 @@ function PageContainer({ noNavbar, children, ...metas }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar />
       <div className="flex-grow flex flex-col mx-auto w-full max-w-screen-md">
-        <Navbar />
         <div className="flex-grow flex flex-col pt-4 px-8 pb-10">
           {children}
         </div>
