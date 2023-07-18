@@ -8,7 +8,7 @@ import { getAllBlogsFrontmatter } from "../utils/blog";
 export default function Home({ blogPosts }) {
   return (
     <PageContainer>
-      <div>
+      <div className="mt-5">
         <h1 className="font-bold text-gray-800 text-3xl sm:text-5xl tracking-tight mb-4">
           Hi I'm Mani bharathi
         </h1>
@@ -36,8 +36,8 @@ export default function Home({ blogPosts }) {
       <div className="mt-8">
         <h1 className="text-gray-800 text-2xl font-bold sm:text-3xl">Blog</h1>
         <p className="mt-2 mb-2 text-gray-600 sm:text-lg">
-          Recently I've started writing online, mostly about tech and coding.
-          The recent few articles are listed below, and the entire list is{" "}
+          I sometime write online, mostly about tech and coding. The recent few
+          articles are listed below, and the entire list is{" "}
           <CustomLink
             href="/blog"
             className="font-medium text-blue-500 hover:underline hover:text-blue-600"

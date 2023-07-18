@@ -24,10 +24,8 @@ function CustomLink({
   }
 
   return (
-    <Link href={href} {...rest}>
-      <a className={className} {...rest}>
-        {children}
-      </a>
+    <Link href={href} {...rest} className={className}>
+      {children}
     </Link>
   );
 }

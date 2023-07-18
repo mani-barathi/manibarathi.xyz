@@ -28,9 +28,7 @@ export default function Index({ blogPosts }) {
               <h2 className="text-gray-700 font-medium text-lg sm:text-xl">
                 {blog.frontmatter.title}
               </h2>
-              <p className="sm:text-lg text-gray-500">
-                {blog.frontmatter.description}
-              </p>
+              <p className="text-gray-500">{blog.frontmatter.description}</p>
             </div>
           </CustomLink>
         ))}
